@@ -1,12 +1,12 @@
 "use strict"
 function solveEquation(a, b, c) {
-  let arr = [];
-  let discrim = a ** 2 - 4 * a * c;
+  const arr = [];
+  const discrim = b ** 2 - 4 * a * c;
 
  
   if (discrim > 0){
-    let radicalFirst = (-b + Math.sqrt(discrim))/(2*a);
-    let radicalSecond = (-b - Math.sqrt(discrim))/(2*a);
+    const radicalFirst = (-b + Math.sqrt(discrim))/(2*a);
+    const radicalSecond = (-b - Math.sqrt(discrim))/(2*a);
     arr.push(radicalFirst , radicalSecond);
      }
 
@@ -15,10 +15,7 @@ function solveEquation(a, b, c) {
    arr.push(radical);
   }  
 
-  else {
-    arr = [];
-  }
-  
+ 
   return arr;
 }
 
@@ -26,7 +23,7 @@ function solveEquation(a, b, c) {
 function calculateTotalMortgage(percent, contribution, amount, countMonths) {
 
 
-  let P = countMonths / 100 / 12;
+  let P = percent / 100 / 12;
   let S = amount - contribution;
 
  let monthPay = S * (P + (P / (((1 + P) ** countMonths) - 1)));
