@@ -10,7 +10,7 @@ function solveEquation(a, b, c) {
     arr.push(radicalFirst , radicalSecond);
      }
 
- else if (discrim = 0){
+ else if (discrim === 0){
   let radical = (-b/(2*a));
    arr.push(radical);
   }  

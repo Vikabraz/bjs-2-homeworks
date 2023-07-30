@@ -1,19 +1,19 @@
-function getArrayParams(...arr) {
+function getArrayParams(...args) {
   args.sort((a,b) =>  a - b);
 
-  let min = args[0];
-  let max = args[i=args.length - 1];
-  let sum = sumAll (...args);
-  let avg = Number((sum / args.length).toFixed(2));
+  let sum = args.reduce(function(res, item) {
+   return  res + item
+  },0);
   
-  function sumAll (...args){
-    let sum = 0;
-     for (let i = 0; i < args.length; i++){
-      sum += args[i];
-    }
-    return sum;
-    }
- 
+  let avg = Number((sum / args.length).toFixed(2));
+  let min;
+  let max;
+
+  for (let i = 0; i < args.length; i++){ 
+    min = args[0];
+    max = args[i=args.length - 1];
+  }
+
     return {
       min,
       max,
@@ -23,17 +23,19 @@ function getArrayParams(...arr) {
 
  
 
-function summElementsWorker(...arr) {
-  let result = arr.reduce((res, item) => res + item);
-return result;
+function summElementsWorker(...arr) { 
+return arr.reduce((res, item) => res + item, 0);
 }
 
 function differenceMaxMinWorker(...arr) {
-  let result = Math.max(...arr) - Math.min(...arr);
-  return result;
+  if(!arr.length){
+    return 0;
+  }
+  return  Math.max(...arr) - Math.min(...arr);
 }
 
 function differenceEvenOddWorker(...arr) {
+
   let sumEvenElement = 0;
   let sumOddElement = 0;
 
@@ -45,11 +47,14 @@ function differenceEvenOddWorker(...arr) {
       sumOddElement += arr[i];
     }
   }
-  let result = sumEvenElement - sumOddElement;
-  return result;
+
+  return sumEvenElement - sumOddElement;
 }
 
 function averageEvenElementsWorker(...arr) {
+  if(!arr.length){
+    return 0;
+  }
   let sumEvenElement = 0;
   let countEvenElement = 0;
 
@@ -59,12 +64,20 @@ function averageEvenElementsWorker(...arr) {
       countEvenElement ++;
     }
   }
-  let result = sumEvenElement / countEvenElement;
-  return result;
+  
+  return sumEvenElement / countEvenElement;
 
 }
 
 function makeWork (arrOfArr, func) {
 
-  let maxWorkerResult
+  let maxWorkerResult = -Infinity;
+
+  for (let i = 0; i < arrOfArr.length; i++) {
+    const maxFunctionResult = func(...arrOfArr[i]);
+    if (maxFunctionResult > maxWorkerResult) {
+      maxWorkerResult = maxFunctionResult;
+    }
+  }
+  return maxWorkerResult;
 }
