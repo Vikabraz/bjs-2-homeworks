@@ -9,7 +9,7 @@ class AlarmClock{
             throw new Error('Отсутствуют обязательные аргументы');
         }
 
-        if(this.alarmCollection.includes(time)){
+        if(this.alarmCollection.some(item => item.time === time)){
             console.warn('Уже присутствует звонок на это же время');
         }
 
@@ -20,7 +20,7 @@ class AlarmClock{
         });
 }
     removeClock(time){
-        this.alarmCollection.filter(item => item.time !== time);
+       this.alarmCollection = this.alarmCollection.filter(item => item.time !== time);
 
     }
     getCurrentFormattedTime(){
@@ -38,7 +38,7 @@ class AlarmClock{
             const currentTime = this.getCurrentFormattedTime();
         
         this.alarmCollection.forEach(item =>{
-            if(item.time === currentTime && this.alarmCollection.canCall){
+            if(item.time === currentTime && item.canCall){
                 item.canCall = false;
                 item.callback();
             }
